@@ -64,7 +64,7 @@ while len(blind_indices) < blind_count:
     if not dup_found:  # 중복되지 않은 경우
         blind_indices.append(index)  # 블라인드 처리할 인덱스를 리스트에 추가
         blind_word_list[index] = '_'  # 해당 인덱스의 문자를 블라인드 처리 
-#ff
+
 # 리스트를 문자열로 변환 #hi
 blind_word = ""
 i = 0
