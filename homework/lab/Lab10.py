@@ -18,13 +18,16 @@ random_computer = random.randint(1, 100)
 count = 0
 print(random_computer)
 
+# 10번 반복
 while count < 10 :
     random_user = int(input(f"기회 {count+1}/10 - 1부터 100 사이의 숫자를 맞춰보세요 (종료하려면 0 입력): "))
     
+    # 0 입력시 바로 프로그램 종료
     if random_user == 0 :
         print("겜을 종료합니다.")
         break
     
+    # 숫자 비교
     if random_computer > random_user :
             print("더 작은 숫자 입니다.")
     elif random_computer < random_user :
@@ -34,7 +37,7 @@ while count < 10 :
         break
     
     count += 1
-    
-if count == 10 and random_computer != random_user :
+    # 게임종료 문구
+if count == 10: 
     print(f"모든 기회를 사용하셨습니다. 정답은 {random_computer}입니다.")
     print("게임이 끝났습니다.")
