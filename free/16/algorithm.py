@@ -9,24 +9,24 @@ import random
 
 # 여기까지만 짜도 점수가 있다.
 # not in 연산자 쓰고 로직 짜기
-# com_list = list()
+com_list = list()
 
-# # 3개의 리스트 생성
-# for count in range(9):
+# 3개의 리스트 생성
+for count in range(9):
 
-#     while True:
-#     # 랜덤 값 생성 :GR
-#         rand_value = random.randint(1, 10)
+    while True:
+    # 랜덤 값 생성 :GR
+        rand_value = random.randint(1, 10)
     
-#     # 생성된 랜던 값이 리스트 내 없을 경우 로직 종료
-#         if rand_value not in com_list:
-#             com_list.append(rand_value)
-#             break
+    # 생성된 랜던 값이 리스트 내 없을 경우 로직 종료
+        if rand_value not in com_list:
+            com_list.append(rand_value)
+            break
 
-    # 중복 값 걸려내기
+#  ?   중복 값 걸려내기
     
 
-# print(com_list)
+print(com_list)
 
 # not in 연산자 사용하지 않고 로직 짜기
 # 왜 이렇게 하냐? 파이썬을 제외하고 다른 언어에는 not in,  연산자가 존재하지 않는다
