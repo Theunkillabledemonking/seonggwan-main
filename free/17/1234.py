@@ -1,26 +1,33 @@
 import random
 
-rand_word = "example"
-length = len(rand_word)
-blind_count = (length // 2) + (length % 2)
-blind_word_list = list(rand_word)
-blind_indices = []
+# 3번 이름
+input_list = []
 
-while len(blind_indices) < blind_count:
-    index = random.randint(0, length -1)
-    dup_found = False
-    for i in range(len(blind_indices)):
-        if blind_indices[i] == index:
-            dup_found = True
+for index in range(3):
+    input_value = input("단어를 입력하세요: ")
+    while True:
+        if 5 <= len(input_value) <= 20:
+            input_list.append(input_value)
             break
-        if not dup_found:
-            blind_indices.append(index)
-            blind_word_list[list] = '_'
-            
-blind_word = ""
-i = 0
-while i < len (blind_word_list):
-    blind_word += blind_word_list[i]
-    i += 1
+        print("5이상 20이하 입력하세요")
+        
+word_choice = list(input_list[random.randint(0,2)])
+print(word_choice)
+word_printed = word_choice[:]
+print(word_printed)
+char_num_word = len(word_printed)
+
+blind_num_word = char_num_word / 2
+if blind_num_word < char_num_word // 2:
+    blind_num_word += 1
     
-print("단어: ", blind_word)
+print(blind_num_word)
+
+range_word_list = [index for index in range(0, char_num_word)]
+print(range_word_list)
+
+for index in range(1, char_num_word - blind_num_word):
+    # if rnadom
+    del range_word_list[random.randint(0, len(range_word_list) -1)]
+
+print(range_word_list)

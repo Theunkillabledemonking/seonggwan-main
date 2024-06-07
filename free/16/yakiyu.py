@@ -1,144 +1,79 @@
-# # 컴퓨터가 생성한 중복되지 않는 3개의 난수를 플레이어가 맞추는게임
-# # 각 시도마다 입력한 숫자와 컴퓨터의 숫자를 비교하여 스트라이크와 볼의 개수를 알려줍니다,
-# # 게임은 플레이어가 정답을 맞추거나 패배 조건에 도달할 때까지
-# import random
+import random
 
-# # 컴퓨터 난수 생성
-# #   - 컴퓨터 난수 생성 0~9 사이의 중복되지 않는 정수 3개 생성
+def getRandList(argNumRandValues, argStartValue, argEndValue):
+    # 컴퓨터가 생성한 랜덤 값을 저정하기 위한 리스트
+    # 1 - 10 사이 유일한 값 3개를 생성 후 저장
+    random_list = []
 
-# # 플레이어 입력
-# #  - 플레이어는 키보드를 통해 0~9 사이의 정수 3개 입력
-# #  - 예외 처리는 하지 않는다. 올바른 입력이 들어온다 가정
+    # 현재 생성된 랜덤 값의 개수 : 0 -> 2
+    rand_trial_count = 0
 
-# # 게임패배 조건
-# #  - 시도 횟수가 5번 이상일 경우
-# #  - 스트라이크 아웃횟수가 2번 이상일 경우
-
-# # 승리 조건
-# #  - 프레이어가 컴퓨터가 생성한 난수 값을 자리 순서대로 맞출 경우
-
-
-# # 중복되지 않은 1~10사이 정수 3개 생성
-# # in, not in, list 내 중복되지 않은 랜덤 정수 생성 함수 사용금지
-
-# # 3 7 4 : computer
-# # 2 3 4 : user
-# # result : 1 strike, 1 ball
-
-# import random
-
-
-# def getRandValue():
-#     rand_list = list()
-
-#     count = 0
-
-#     while count < 3:
-#         rand_value = random.randint(1, 10)
-#         found_duplicated_value = False
+    # 랜덤 값 3개를 생성하기 위해 while문 사용
+    while rand_trial_count < argNumRandValues:
         
-#         for sub_count in range(count):
-#             # 중복 값이 있을 경우
-#             if rand_value == rand_list[sub_count]:
-#                 found_duplicated_value = True
-#                 break
+        # 랜덤 값 생성
+        rand_value = random.randint(argStartValue, argEndValue)
         
-#         if not found_duplicated_value:
-#             rand_list.append(rand_value)
-#             count += 1
+        # 중복 값 확인을 위한 플래그 변수
+        found_dup_value = False
+        
+        # 중복값 검사를 위한 반복문 : 반복회수 현재 N번째 -> N-1
+        for index in range(rand_trial_count):
+            if random_list[index] == rand_value:
+                found_dup_value = True
+                break
             
-#     return rand_list
+        # 생성된 랜덤 값이 중복되지 않을 경우
+        if not found_dup_value:
+            random_list.append(rand_value) # 리스트에 랜덤 값을 추가
+            rand_trial_count += 1 # 다음 랜덤 값 생성 실행
+            
+    return random_list
+            
+com_random_list = getRandList(3, 1, 3)
+
+print("컴퓨터 랜덤 값: ", com_random_list)
 
 # count_game_trial = 0
 # count_strike_out = 0
-# count_strike = 0
-
-# com_list = getRandValue()
 
 # while True:
+#     count_strkie = 0
+#     count_ball = 0
+    
 #     # 사용자 입력
-
-#     # strike, Ball 판별
-
-#     # 변수 업데이트
-
-#     # 종료 조건 : 패배
+#     print("사용자 입력 : ")
+#     user_input = [int(input()) for _ in range(3)]
+    
+#     # strkie, ball 판정
+#     for i in range(3):
+#         for j in range(3):
+#             if com_random_list[i] == user_input[j]:
+#                 if i == j:
+#                     count_strkie += 1
+#                 else:
+#                     count_ball += 1
+                
+#                 break
+            
+#     # 스트라이크 아웃
+#     if count_strkie == 0 and count_ball == 0:
+#         count_strike_out += 1
+#         print("스트라이크 아웃")
+#     else:
+#         print("Strike: ", count_strkie, "\tBall: ", count_ball)
+        
+#     # 종료 조건
+#     # 1) Lose
+#     #   - 시도 회수 5번 이상
+#     #   - 스트라이크 아웃 2번 이상
 #     if count_game_trial >= 5 or count_strike_out >= 2:
+#         msg = "5회 이상 실행" if count_game_trial >= 5 else "스트라이크 아웃 2회 이상"
+#         print(msg, "\t 게임 종료")
 #         break
     
-#     # 종료 조건 : 승리
-#     if count_strike >= 3:
+#     # 2) Win
+#     #   - strike 3개
+#     if count_strkie >= 3:
+#         print("승리\t게임 종료")
 #         break
-
-
-
-import random
-
-# 중복되지 않은 0~9 사이 정수 3개 생성 (in, not in 사용 금지)
-def getRandValue():
-    rand_list = list()
-    
-    count = 0
-    
-    while count < 3:
-        rand_value = random.randint(1, 10)  # 1에서 10 사이의 정수 생성
-        found_duplicated_value = False
-        for sub_count in range(count):
-            if rand_value == rand_list[sub_count]:
-                found_duplicated_value = True
-                break
-        if not found_duplicated_value:
-            rand_list.append(rand_value)
-            count += 1
-    return rand_list
-
-count_game_trial = 0
-count_strike_out = 0
-com_list = getRandValue()
-
-
-while True:
-    # 사용자 입력
-    input_user = input(f"시도 {count_game_trial + 1}: 입력한 숫자 (공백으로 구분) - ")
-    user_list_split = input_user.split(" ")
-    user_list = list()
-    for num_str in user_list_split:
-        user_list.append(int(num_str))
-
-    # 스트라이크, 볼, 아웃 판별
-    strikes = 0
-    balls = 0
-    outs = 0
-    for i in range(3):
-        # [i]를 사용해 같은 위치에 있는 숫자가 동일한지 확인
-        if user_list[i] == com_list[i]:
-            strikes += 1
-        else:
-            #다른 위치에 있는 경우 i != j 서로 다른 위치 숫자 비교 조건
-            found = False
-            for j in range(3):
-                if user_list[i] == com_list[j] and i != j:
-                    balls += 1
-                    found = True # 볼을 찾았음을 표시
-                    break
-            if not found: # 볼을 찾지 못했으므로 아웃 증가
-                outs += 1
-
-    print(f"결과: {strikes} 스트라이크, {balls} 볼, {outs} 아웃")
-
-    # 변수 업데이트
-    count_game_trial += 1
-    if strikes == 0: # 스트라이크가 0인 경우 스트라이크 아웃 횟수를 증가시킴
-        count_strike_out += 1
-
-    # 종료 조건 : 패배
-    if count_game_trial >= 5 or count_strike_out >= 2:
-        print(f"게임 종료 : 패배 (시도 횟수 {count_game_trial}회, 스트라이크 아웃 {count_strike_out}회 초과)")
-        print(f"정답 : {com_list}")
-        break
-
-    # 종료 조건 : 승리
-    if strikes >= 3:
-        print("게임종료 : 승리!")
-        print(f"정답 : {com_list}")
-        break

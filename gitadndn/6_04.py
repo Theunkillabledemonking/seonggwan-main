@@ -8,7 +8,7 @@ for i in range(3):
             word_list.append(user_input)
             break
         print("5이상 20이하 쳐주시오")
-    
+
 word_select = list(word_list[random.randint(0, 2)])
 word_printed = word_select[:]
 
