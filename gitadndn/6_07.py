@@ -77,58 +77,89 @@
 
 
 import random
-input_list = []
+
 # 단어 입력
-for index in range(3):
-    while True:
-        input_value = input("입력하세요")
-        if 5 <= len(input_value) <= 20 :
-            input_list.append(input_value)
-            break
-        print("5이상 20이하 단어를 입력하세요")
+def get_user_input():
+    input_list = []
+    for index in range(3):
+        while True:
+            input_value = input("입력하세요")
+            if 5 <= len(input_value) <= 20 :
+                input_list.append(input_value)
+                break
+            print("5이상 20이하 단어를 입력하세요")
+    return input_list
 #단어 복사
         
 # 단어 랜덤 선택
-word_select = list(input_list[random.randint(0, 2)])
-word_print = word_select[:] # 복사
-print(word_print)
+def select_random_word(input_list):
+    word_select = list(input_list[random.randint(0, 2)])
+    word_print = word_select[:] # 복사
+    return word_select, word_print
+    #print(f"단어 선택 완료 게임을 시작합니다. 선택된 단어 : {''.join(word_print)}")
+
 # 반올림 처리
-char_num_word = len(word_select)
-blind_num_word = char_num_word / 2
-if blind_num_word < char_num_word // 2:
-    blind_num_word += 1
-print(blind_num_word)
-blind_num_word = int(blind_num_word)
+def calculate_blind_num_word(char_num_word):
+    if char_num_word % 2 == 0:
+        return char_num_word // 2
+    else:
+        return (char_num_word // 2) + 1
+
 # 블라인드 처리
-blind_num_list = [index for index in range(0, char_num_word)]
-print(blind_num_list)
+def get_blind_indeice(char_num_word, blind_num_word):
+    blind_num_list = [index for index in range(char_num_word)]
+    # 필요한 만큼 인덱스를 제거
+    while len(blind_num_list) > blind_num_word:
+        del blind_num_list[random.randint(0, len(blind_num_list) - 1)]
+    return blind_num_list
 
-for index in range(1, char_num_word - blind_num_word):
-    del blind_num_list[random.randint(0, len(blind_num_list) - 1)]
-print(blind_num_list)
+# for index in range(1, char_num_word - blind_num_word):
+#     del blind_num_list[random.randint(0, len(blind_num_list) - 1)]
 
-for index in blind_num_list:
-    word_print[index] = "_"
 
-count = 1
-print(word_print)
-# 정답 입력
-while len(blind_num_list) > 0 :
-    print(word_print)
-    found_list = []
-    
-    input_value = input(f"{count}번째 시도 입력하세요")
+def blind_word(word_print, blind_num_list):
     for index in blind_num_list:
-        if word_select[index] == input_value:
-           word_print[index] = input_value
-           found_list.append(index)
-           
-    # 인덱스 값 지우기
-    for f_index in found_list:
-        blind_num_list.remove(f_index)
-    
-    count += 1
-# 블라인드 해제
+        word_print[index] = "_"
+    return word_print
 
-# 게임 종료
-print(f"clear 선택된 단어 {word_select}, 총 시도 횟수 {count}")
+def play_game(word_select, word_print, blind_num_list):
+    count = 0
+    # 정답 입력
+    while len(blind_num_list) > 0 :
+        print(''.join(word_print))
+        found_list = []
+            
+    # 블라인드 해제
+        input_value = input(f"{count + 1}번째 시도 입력하세요")
+        for index in blind_num_list:
+            if word_select[index] == input_value:
+                word_print[index] = input_value
+                found_list.append(index)
+            
+    # 인덱스 값 지우기
+        for f_index in found_list:
+            blind_num_list.remove(f_index)
+        
+        count += 1
+    return count
+
+def main():
+    input_list = get_user_input()
+    word_select, word_print = select_random_word(input_list)
+    print(f"단어 선택 완료. 선택된 단어 {''.join(word_print)}")
+    
+    char_num_word = len(word_select)
+    blind_num_word = calculate_blind_num_word(char_num_word)
+    
+    blind_num_list = get_blind_indeice(char_num_word, blind_num_word)
+    
+    word_print= blind_word(word_print, blind_num_list)
+    print("선택된 단어", ''.join(word_print))
+    
+    count = play_game(word_select, word_print, blind_num_list)
+    
+    print(f"완성된 단어 : {''.join(word_print)}, 총 시도된 횟수 : {count}")
+    
+
+if __name__ == "__main__":
+    main()
