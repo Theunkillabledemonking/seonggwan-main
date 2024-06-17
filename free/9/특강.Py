@@ -1,5 +1,5 @@
 
-input_number ="990229-1234567"
+input_number ="010410-3683219"
 check_number = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5]
 
 # 유효성 검사
@@ -17,10 +17,10 @@ for num in input_number:
 print(preprocessed_number)
 print(preprocessed_number[:-1])
 
-# #for num in input_number:
-#     if num != "-" and count < 12 :
-#         sum += int(num) * check_number[count]
-#         count += 1
+for num in input_number:
+    if num != "-" and count < 12 :
+        sum += int(num) * check_number[count]
+        count += 1
         
 
 # 체크값을 계산한다 : (11 - (sum % 11)) % 10 == input_number[-1]
