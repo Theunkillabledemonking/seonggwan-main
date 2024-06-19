@@ -61,7 +61,7 @@ while True:
                 for j in range(i + 1):
                     line += str(rand_com[index])
                     index += 1
-                print(f" " * (try_value - i -1) + line)
+                print(f" " * (try_value - i - 11) + line)
             break
         
 # # 종료
