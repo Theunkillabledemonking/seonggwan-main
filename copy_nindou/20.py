@@ -1,6 +1,4 @@
-
 import random
-
 
 def print_menu():
     width = 15
@@ -9,28 +7,26 @@ def print_menu():
     print("2. 삼각형 출력")
     print("3. 종료")
     print("-" * width)
-    
+
 def is_valid_num(arg_start, arg_end, *args):
     
     for value in args:
         if not (arg_start <= value <= arg_end):
             return False
-            
     return True
 
 def print_mul_table():
     
     while True:
-        input_value = input("출력할 단을 입력하세요: ")
+        input_value = input("출력할 단을 입력하세요 :")
         
         input_list = input_value.split("~")
         input_list = [int(value) for value in input_list]
-            
-        if is_valid_num(2, 9, *input_list):
+        
+        if is_valid_num(2, 9, *input_list): # 튜플로 입력 받기에 *가 필수
             break
-            
-        print("2~9 정수를 입력 하세요")
-              
+        
+        print("2~9 정수를 입력하세요.")
     
     # 구구단을 출력
     start = input_list[0]
@@ -46,35 +42,34 @@ def print_triangle():
     while True:
         row_num = int(input("삼각형의 높이를 입력하세요: "))
         
-        if is_valid_num(2, 3, row_num):
+        if is_valid_num(2, 4, row_num):
             break
         
-        print("2~3 값을 입력 하세요")
-    
-    # rand_list = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        print("2~3 값을 입력하세요:")
+        
+    # rand
     rand_list = [value for value in range(10)]
     
     for rnum in range(row_num):
-        # 공백 출력
+        #공백
         print(" " * (row_num - rnum - 1), end="")
-         
-        # 난수 값 출력
+        
+        #난수 값 출력
         for _ in range(rnum + 1):
             rand_num = rand_list[random.randint(0, len(rand_list) - 1)]
             rand_list.remove(rand_num)
             
             print(rand_num, end="")
-            
-        # 개행 문자
+        
+        # 개행 문자    
         print()
-    
+
 while True:
-
-    # 메뉴 출력
+    #메뉴 출력
     print_menu()
-
+    
     input_value = int(input("메뉴를 선택 해주세요: "))
-
+    
     if not (1 <= input_value <= 3):
         print("1~3 정수를 입력하세요")
         continue
@@ -82,9 +77,11 @@ while True:
     # 1. 구구단 실행
     if input_value == 1:
         print_mul_table()
+    
     # 2. 삼각형 출력
     elif input_value == 2:
         print_triangle()
+    
     # 3. 종료
     elif input_value == 3:
         print("종료")
