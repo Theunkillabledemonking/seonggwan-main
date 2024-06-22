@@ -54,6 +54,8 @@ while True:
                     index += 1
                 print(" " * (try_value - i - 1) + lines)
             break
+        
+        
                 
 # 3. 종료
     elif input_value == 3:
