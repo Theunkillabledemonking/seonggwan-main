@@ -13,7 +13,7 @@ def print_bingo_board(arg_list, col_num = N):
         
         if (index + 1) % col_num == 0 :
             print()
-# n 값 입력
+# n 값 입력 
 bingo_element_num = N * N
 
 
@@ -54,7 +54,7 @@ while bingo_count < 2:
     # 가로 확인 알고리즘
     for row in range(N):
         for col in range(N):
-            if bingo_board[col + (row * N) ] != "*":
+            if bingo_board[col + (row * N)] != "*":
                 break
         else:
             bingo_count += 1
