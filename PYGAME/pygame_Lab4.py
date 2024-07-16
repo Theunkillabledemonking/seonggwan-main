@@ -13,13 +13,13 @@ while running:
     for event in pygame.event.get():
         # 마우스 버튼을 클릭하면 발생하는 이벤트
         # 클릭된 위치에서 랜덤한 크기의 원을 그림
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
             random_color = ((random.randint(0, 255)), (random.randint(0, 255)), (random.randint(0, 255)))
             pygame.draw.circle(screen, random_color, (event.pos), random.randint(0,40))
             pygame.display.flip()
-            print(f"Mouse button {event.button} clicked at positon {event.pos}")
-        elif event.type == pygame.QUIT:
-            running = False
+            # print(f"Mouse button {event.button} clicked at positon {event.pos}")
         
 
 
