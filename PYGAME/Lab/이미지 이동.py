@@ -4,9 +4,11 @@ import pygame
 pygame.init() # 파이게임 초기화
 
 screen = pygame.display.set_mode((800, 600)) # 화면 사이즈
+pygame.display.set_caption("Image Movement")
 
 # << -- fps 적용을 위한 시간 객체 생
 clock = pygame.time.Clock()
+fps = 30
 ## ->>
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -27,7 +29,8 @@ red_rect = red_image.get_rect()
 red_rect.topleft = (200, 200)
 
 # 이동 속도 설정
-speed = 1
+speed = 200 # 사각형의 이동속도 5 pixel
+delta_speed = 0
 
 running = True
 while running:
@@ -36,7 +39,7 @@ while running:
             running = False
             # 이벤트가 발생할 때 실행된다.
     
-    clock.tick(60)
+    dt = clock.tick(120) / 1000 
     # 이벤트 처리가 끝난 후 실행
     screen.fill((white))
     
@@ -62,7 +65,8 @@ while running:
     # 이미지 그리기
     screen.blit(blue_image, blue_rect)
     screen.blit(red_image, red_rect)
-
+    red_rect.x += speed * dt
+    
     pygame.display.flip()
     # pygame fps 설정
 
